@@ -18,7 +18,7 @@ class RolController extends Controller
     public function __construct()
     {  
         $this->middleware('auth');
-        //$this->middleware('rol');
+        $this->middleware('administrator');
     }    
 
     public function index()

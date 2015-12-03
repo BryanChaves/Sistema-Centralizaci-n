@@ -11,12 +11,21 @@ class Entity extends Model
 	protected $guarded  = array('id');
 	public    $timestamps = false;
 
-	static public function getEntities(){
+	static public function getEntities($id){
 		 return \DB::table('entity')
-            ->where('entity.rol_id', 3)
+            ->where('entity.rol_id', $id)
             ->select('entity.*')
             ->get(); 
 	}
+
+	static public function getEntityRol($id){
+		 return \DB::table('rol')
+            ->join('entity', 'rol.id', '=', 'entity.rol_id')
+            ->where('entity.rol_id','<>', $id)
+            ->select('entity.*')
+            ->get(); 
+	}
+
 
 	
 }

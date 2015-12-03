@@ -83,6 +83,12 @@ class User extends Model implements AuthenticatableContract,
         $name_Entity=$this->extractEntityName($id_Entity);
         return $name_Entity;    
     }
+    public function nameEntity($id)
+    {
+        $id_Entity=$this->extractIdEntity($id);
+        $name_Entity=$this->extractEntityName($id_Entity);
+        return $name_Entity;    
+    }
 
     public function idEntity()
     {
@@ -176,6 +182,72 @@ class User extends Model implements AuthenticatableContract,
             ->where('entity.id', $id)
             ->select('users.*')
             ->get(); 
+    }
+
+    static public function getUsersRol($id)
+    {
+        return \DB::table('users')
+            ->join('user_entity', 'users.id', '=', 'user_entity.user_id')
+            ->join('entity', 'entity.id', '=', 'user_entity.entity_id')
+            ->where('entity.rol_id','<>',$id)
+            ->select('users.*')
+            ->get(); 
     } 
+    public function getIdRol($name)
+    {
+        return \DB::table('rol')
+            ->where('rol.name',$name)
+            ->select('rol.id')
+            ->get(); 
+    } 
+    public function extractIdRol($name){
+        $id_Rol=0;
+        $consult_name=$this->getIdRol($name);
+        foreach ($consult_name as $id ) {
+            $id_Rol=$id->id; 
+        }
+        return $id_Rol;
+    }
+    public function existEmail($email){
+        return \DB::table('users')
+            ->where('users.email',$email)
+            ->select('users.email')
+            ->get();
+    }
+
+    public function existID($ID){
+        return \DB::table('users')
+            ->where('users.ID_number',$ID)
+            ->select('users.ID_number')
+            ->get();
+    }
+    public function userEmail($id){
+        return \DB::table('users')
+            ->where('users.id',$id)
+            ->select('users.email')
+            ->get();
+    }
+    public function extractUserEmail($id){
+        $name_Email="";
+        $consult=$this->userEmail($id);
+        foreach ($consult as $email ) {
+            $name_Email=$email->email; 
+        }
+        return $name_Email;
+    }
+    public function userID($id){
+        return \DB::table('users')
+            ->where('users.id',$id)
+            ->select('users.ID_number')
+            ->get();
+    }
+    public function extractUserID($id){
+        $num_ID=0;
+        $consult=$this->userID($id);
+        foreach ($consult as $id ) {
+            $num_ID=$id->ID_number; 
+        }
+        return $num_ID;
+    }
 
 }

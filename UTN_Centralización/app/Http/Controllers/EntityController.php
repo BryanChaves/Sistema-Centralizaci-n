@@ -18,7 +18,6 @@ class EntityController extends Controller
 {
     public function __construct()
     {  
-        $this->middleware('auth');
        $this->middleware('auth');
         if (Auth::user()->getRol()=="Administrador") {
            $this->middleware('administrator'); 
@@ -34,9 +33,16 @@ class EntityController extends Controller
 
     public function index()
     {   
+        $name="Administrador";
+        if (Auth::user()->getRol()=="Institución") {
+         $entities=Entity::getEntityRol(Auth::user()->extractIdRol($name));
+        }else{
+            $entities=Entity::all();
+        }
+        
         $view=Auth::user()->getView();
         $roles=Rol::all();
-        $entities=Entity::all();
+        
         return view('entities.index',compact('entities','roles','view'));
     }
 
@@ -50,9 +56,11 @@ class EntityController extends Controller
     public function store(CreateEntityRequest $request)
     {   
         $rol_id = $request->input('rol_id');
-        if ((Auth::user()->getRol()=="Institución")&&(Auth::user()->extractRol($rol_id)=="Institución")||(Auth::user()->extractRol($rol_id)=="Administrador")) {
-           Session::flash('message','No posee privilegios para crear una entidad con el rol de institución ó administrador');
-           return redirect()->route('entidades.create');
+        if ((Auth::user()->getRol()=="Institución")&&((Auth::user()->extractRol($rol_id)=="Administrador"))) {
+           return redirect()->to('entidades/create')->withInput()->withErrors(array('invalid' => 'No posee privilegios para crear una entidad con el rol de administrador'));
+        }
+        if ($this->existEntity($request->input('name'))) {
+          return redirect()->to('entidades/create')->withInput()->withErrors(array('invalid' => 'Ya ese nombre fue tomado favor escribir otro')); 
         }
         $date = Carbon::now();        
         $entity= new Entity($request->all());
@@ -69,6 +77,16 @@ class EntityController extends Controller
 
     public function edit($id)
     {   
+        if ((Auth::user()->getRol()=="Institución")&&(Auth::user()->extractRolName($id)=="Administrador")) {
+            Session::flash('message','No posee privilegios');
+            return redirect()->route('entidades.index');
+        }
+        if ((Auth::user()->getRol()=="Institución")&&(Auth::user()->checkRol($id)=="Institución")) {
+            if ((Auth::user()->getNameEntity())!=(Auth::user()->nameEntity($id))) {
+                 Session::flash('message','No posee privilegios para editar esta entidad');
+                 return redirect()->route('entidades.index');
+            }
+        }
         $view=Auth::user()->getView();
         $roles=Rol::all();
         $entity = Entity::findOrFail($id);
@@ -91,10 +109,31 @@ class EntityController extends Controller
             Session::flash('message','No posee privilegios para eliminar esta entidad');
             return redirect()->route('entidades.index');
         }
+        if ((Auth::user()->getRol()=="Institución")&&(Auth::user()->checkRol($id)=="Institución")) {
+            if ((Auth::user()->getNameEntity())!=(Auth::user()->nameEntity($id))) {
+                 Session::flash('message','No posee privilegios para editar esta entidad');
+                 return redirect()->route('entidades.index');
+            }
+        }
         $entity= Entity::findOrFail($id);
         $entity->delete($id);
         Session::flash('message',$entity->name.' ' .'fue eliminado de nuestros registros.');
         return redirect()->route('entidades.index');
+    }
+
+    public function existEntity($name){
+        
+        $status=False;
+        $entities=Entity::all();
+        
+        foreach ($entities as $entity ) {
+            if ((strtolower($entity->name))==(strtolower($name))) {
+                $status=True;
+            }
+            
+        }
+
+        return $status;
     }
 
 }

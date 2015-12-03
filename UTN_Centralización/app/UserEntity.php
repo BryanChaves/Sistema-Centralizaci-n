@@ -29,4 +29,21 @@ class UserEntity extends Model
             ->where('users.id', $id)
             ->get(); 
     }
+    static public function getEntityRol($id)
+    {
+        return \DB::table('users')
+            
+            ->join('user_entity', 'users.id', '=', 'user_entity.user_id')
+            ->join('entity', 'entity.id', '=', 'user_entity.entity_id')
+            ->where('entity.rol_id','<>',$id)
+            ->select('user_entity.*')
+            ->get(); 
+    }
+    static public function getExist($id)
+    {
+        return \DB::table('user_entity')
+            ->where('user_entity.user_id',$id)
+            ->select('user_entity.user_id')
+            ->get(); 
+    }
 }

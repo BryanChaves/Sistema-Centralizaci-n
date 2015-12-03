@@ -17,8 +17,8 @@ class CreateUserRequest extends Request
             'name'=>'required|alpha', 
             'last_name_1'=>'required|alpha',
             'last_name_2'=>'required|alpha',
-            'ID_number'=>'required|numeric',
-            'telephone_number'=>'required|min:8|numeric',
+            'ID_number'=>'required|numeric|unique:users',
+            'telephone_number'=>'min:8|numeric',
             'email'=>'required|email|max:255|unique:users',
             'password'=>'required' 
         ];

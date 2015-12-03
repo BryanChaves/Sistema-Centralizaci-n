@@ -14,7 +14,7 @@ class CreateEntityRequest extends Request
     public function rules()
     {
         return [
-            'name'=>'required|alpha', 
+            'name'=>'required|alpha|unique:entity', 
             'address'=>'required',
             'email'=>'required|email|max:255|unique:entity',
             'telephone_number'=>'required|min:8|numeric',

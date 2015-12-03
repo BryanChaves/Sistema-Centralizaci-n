@@ -17,7 +17,7 @@ class ParameterController extends Controller
     public function __construct()
     {  
         $this->middleware('auth');
-        //$this->middleware('rol');
+        $this->middleware('administrator'); 
     }
 
     public function index()
@@ -45,7 +45,7 @@ class ParameterController extends Controller
 
     public function show($id)
     {
-        //
+        
     }
 
     public function edit($id)

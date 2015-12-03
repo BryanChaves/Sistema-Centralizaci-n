@@ -17,14 +17,17 @@ class FileController extends Controller
     public function __construct()
     {  
         $this->middleware('auth');
-        //$this->middleware('rol');
+        if (Auth::user()->getRol()=="Administrador") {
+           $this->middleware('administrator'); 
+        }else{
+           $this->middleware('institution');
+        }
     }    
 
-    public function index(Request $request)
+    public function index()
     {   
         $view=Auth::user()->getView();
         $files=File::all();
-       
         return view('files.index',compact('files','view'));
     }
 
@@ -35,7 +38,11 @@ class FileController extends Controller
     }
 
     public function store(FileRequest $request)
-    {
+    {   
+        if ($this->exist($request->input('num_file'))) {
+            return redirect()->to('expedientes/create')->withInput()->withErrors(array('invalid' => 'Ya existe el expediente por favor digite uno distinto')); 
+        }
+        
         $date = Carbon::now();        
         $file= new File($request->all());
         $file->created_at = $date;
@@ -58,8 +65,16 @@ class FileController extends Controller
 
     public function update(FileRequest $request,$id)
     {
+        
         $date = Carbon::now();  
         $file= File::findOrFail($id);
+       
+        if ((strtolower($this->removeSpace($file->num_file)))!=(strtolower($this->removeSpace($request->input('num_file'))))){
+           if ($this->exist($request->input('num_file'))) {
+                return redirect()->to('expedientes/'.$id.'/edit')->withInput()->withErrors(array('invalid' => 'Ya existe el expediente por favor digite uno distinto')); 
+            }
+        }
+         
         $file->fill($request->all());
         $file->updated_at = $date; 
         $file->save();
@@ -73,5 +88,26 @@ class FileController extends Controller
         Session::flash('message','Fue eliminado de nuestros registros.');
         return redirect()->route('expedientes.index');
     }
+
+    public function exist($num){
+        $status=False;
+        $files=File::all();
+       
+        
+        foreach ($files as $file ) {
+            if ((strtolower($this->removeSpace($file->num_file)))==(strtolower($this->removeSpace($num)))) {
+                $status=True;
+            }
+            
+        }
+
+        return $status;
+    }
+
+    public function removeSpace($cadena){
+    $cadena = str_replace(' ', '', $cadena);
+    return $cadena;
+    }
+
 
 }

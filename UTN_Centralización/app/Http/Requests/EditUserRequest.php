@@ -18,7 +18,7 @@ class EditUserRequest extends Request
             'last_name_1'=>'required|alpha',
             'last_name_2'=>'required|alpha',
             'ID_number'=>'required|alpha_num',
-            'telephone_number'=>'required|min:8',
+            'telephone_number'=>'min:8|numeric',
             'email'=>'required|email|max:255'      
         ];
     }

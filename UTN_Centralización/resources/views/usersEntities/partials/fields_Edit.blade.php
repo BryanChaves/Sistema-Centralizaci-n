@@ -4,9 +4,9 @@
     @foreach($users as $user)
       <?php
         if($user->id == $userEntity->user_id){
-          echo "<option selected value=$user->id>$user->full_name</option>";    
+          echo "<option selected value=$user->id>$user->name</option>";    
         }else{
-          echo "<option value=$user->id>$user->full_name</option>";   
+          echo "<option value=$user->id>$user->name</option>";   
         }
       ?>
     @endforeach

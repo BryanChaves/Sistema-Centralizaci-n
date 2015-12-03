@@ -27,8 +27,11 @@ class UserController extends Controller
         $view = Auth::user()->getView();
         if((Auth::user()->getRol()=="Gestor")){ 
             $users = User::getUsers($idEntity);            
+        }elseif((Auth::user()->getRol()=="Institución")){
+            $name="Administrador";
+            $users = User::getUsersRol(Auth::user()->extractIdRol($name));
         }else{
-            $users = User::all();
+            $users = User::all(); 
         }
         return view('users.index',compact('view','users'));
     }
@@ -71,13 +74,36 @@ class UserController extends Controller
     }
     public function edit($id)
     {   
+        
+
+        if ((Auth::user()->getRol()=="Institución")&&(Auth::user()->checkRol($id)=="Administrador")) {
+            Session::flash('message','No posee privilegios para editar este usuario');
+            return redirect()->route('usuarios.index');
+        }
+        if ((Auth::user()->getRol()=="Institución")&&(Auth::user()->checkRol($id)=="Institución")) {
+            if ((Auth::user()->getNameEntity())!=(Auth::user()->nameEntity($id))) {
+                 Session::flash('message','No posee privilegios para editar este usuario');
+                 return redirect()->route('usuarios.index');
+            }
+        }
         $view = Auth::user()->getView(); 
         $user = User::findOrFail($id);
         return view('users.edit',compact('user','view'));
     }
 
     public function update(EditUserRequest $request,$id)
-    {
+    {   
+        
+        if ((Auth::user()->extractUserEmail($id))!=($request->input('email'))) {
+            if ($this->existEmail($request->input('email'))) {
+                return redirect()->to('usuarios/'.$id.'/edit')->withInput()->withErrors(array('invalid' => 'El correo electrónico ya ha sido tomado por favor digite otro'));
+            }
+        }
+        if ((Auth::user()->extractUserID($id))!=($request->input('ID_number'))) {
+            if ($this->existID($request->input('ID_number'))) {
+                return redirect()->to('usuarios/'.$id.'/edit')->withInput()->withErrors(array('invalid' => 'La cédula ya ha sido tomada por favor digite otra'));
+            }
+        }
         $date = Carbon::now();  
         $user = User::findOrFail($id);
         $user ->fill($request->all());
@@ -88,14 +114,42 @@ class UserController extends Controller
 
     public function destroy($id)
     {   
-        if ((Auth::user()->getRol()=="Institución")&&(Auth::user()->checkRol($id)=="Administrador")) {
-            Session::flash('message','No posee privilegios para eliminar este usuario');
-            return redirect()->route('usuarios.index');
+        
+        if ((Auth::user()->getRol()=="Institución")&&(Auth::user()->checkRol($id)=="Institución")) {
+            if ((Auth::user()->getNameEntity())!=(Auth::user()->nameEntity($id))) {
+                Session::flash('message','No posee privilegios para eliminar este usuario');
+                return redirect()->route('usuarios.index');
+            }
         }
         $user = User::findOrFail($id);
         $user->delete($id);
         Session::flash('message',$user->full_name.' ' .'fue eliminado de nuestros registros.');
         return redirect()->route('usuarios.index');
     }
+
+    public function existEmail($email){
+        $exist=False;
+        if (Auth::user()->existEmail($email)!=[]) {
+            $exist=True;
+        }
+        return $exist; 
+    }
+    public function existID($ID){
+        $exist=False;
+        if (Auth::user()->existID($ID)!=[]) {
+            $exist=True;
+        }
+        return $exist; 
+    }
+
+    public function exist($ID){
+        $exist=False;
+        if (Auth::user()->existID($ID)==[]) {
+            $exist=True;
+        }
+        return $exist; 
+    }
+    
+
 
 }

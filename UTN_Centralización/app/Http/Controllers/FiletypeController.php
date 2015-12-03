@@ -17,7 +17,11 @@ class FiletypeController extends Controller
     public function __construct()
     {  
         $this->middleware('auth');
-        //$this->middleware('rol');
+        if (Auth::user()->getRol()=="Administrador") {
+           $this->middleware('administrator'); 
+        }else{
+           $this->middleware('institution');
+        }
     } 
 
     public function index()

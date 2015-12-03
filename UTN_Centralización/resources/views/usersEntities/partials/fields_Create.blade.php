@@ -3,7 +3,7 @@
   <select  class="text"  name="user_id">
     @foreach($users as $user)
       <?php                    
-       echo "<option selected value=$user->id>$user->full_name</option>";                    
+       echo "<option selected value=$user->id>$user->name</option>";                    
       ?>
     @endforeach
   </select>
