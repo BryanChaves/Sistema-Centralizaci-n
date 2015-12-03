@@ -1,22 +1,22 @@
-<table id="tables" class="table table-striped table-bordered bootstrap-datatable datatable responsive">
+<table id="tables" class="table table-striped table-bordered bootstrap-datatable datatable responsive" style="border: black 1px solid;">
     <thead>
     <tr>
-        <th>{{trans('validation.attributes.watersource_name')}}</th>
-        <th>{{trans('validation.attributes.address')}}</th>
-        <th>{{trans('validation.attributes.coordinate')}}</th>
-        <th>{{trans('validation.attributes.observations')}}</th>
-        <th>{{trans('validation.attributes.actions')}}</th>
+        <th style='border: black 2px solid; text-align:center;'>{{trans('validation.attributes.watersource_name')}}</th>
+        <th style='border: black 2px solid; text-align:center;'>{{trans('validation.attributes.address')}}</th>
+        <th style='border: black 2px solid; text-align:center;'>{{trans('validation.attributes.coordinate')}}</th>
+        <th style='border: black 2px solid; text-align:center;'>{{trans('validation.attributes.observations')}}</th>
+        <th style='border: black 2px solid; text-align:center;'>{{trans('validation.attributes.actions')}}</th>
     </tr>
     </thead>
     <tbody>
     
       @foreach($watersources as $watersource)
            <tr data-id="{{$watersource->id}}">  
-              <td>{{$watersource->watersource_name}}</td>
-              <td>{{$watersource->address}}</td>
-              <td>{{$watersource->coordinate_CRTM05}}</td>
-              <td>{{$watersource->observations}}</td>
-              <td class="center">
+              <td style='border: black 1px solid;'>{{$watersource->watersource_name}}</td>
+              <td style='border: black 1px solid;'>{{$watersource->address}}</td>
+              <td style='border: black 1px solid;'>{{$watersource->coordinate_CRTM05}}</td>
+              <td style='border: black 1px solid;'>{{$watersource->observations}}</td>
+              <td class="center" style='border: black 1px solid;'>
                 
                 <a class="btn btn-info btn-xs btn-block" href="{{ route('nacientes.edit',$watersource->id)}}">
                   <i class="glyphicon glyphicon-edit icon-white"></i>

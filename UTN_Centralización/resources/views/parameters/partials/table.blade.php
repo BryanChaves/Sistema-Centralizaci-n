@@ -1,22 +1,22 @@
-<table id="tables" class="table table-striped table-bordered bootstrap-datatable datatable responsive">
+<table id="tables" class="table table-striped table-bordered bootstrap-datatable datatable responsive" style="border: black 1px solid; width:800px; margin: 0 auto;">
     <thead>
     <tr>
-        <th>{{trans('validation.attributes.parameter')}}</th>
-        <th>{{trans('validation.attributes.unit')}}</th>
-        <th>{{trans('validation.attributes.recommended_value')}}</th>
-        <th>{{trans('validation.attributes.maximum_allowable')}}</th>
-        <th>{{trans('validation.attributes.actions')}}</th>
+        <th style='border: black 2px solid; text-align:center;'>{{trans('validation.attributes.parameter')}}</th>
+        <th style='border: black 2px solid; text-align:center;'>{{trans('validation.attributes.unit')}}</th>
+        <th style='border: black 2px solid; text-align:center;'>{{trans('validation.attributes.recommended_value')}}</th>
+        <th style='border: black 2px solid; text-align:center;'>{{trans('validation.attributes.maximum_allowable')}}</th>
+        <th style='border: black 2px solid; text-align:center;'>{{trans('validation.attributes.actions')}}</th>
     </tr>
     </thead>
     <tbody>
     
       @foreach($parameters as $parameter)
             <tr data-id="{{$parameter->id}}">
-              <td>{{$parameter->parameter}}</td> 
-              <td>{{$parameter->unit}}</td> 
-              <td>{{$parameter->recommended_value}}</td>   
-              <td>{{$parameter->maximum_allowable}}</td>         
-              <td class="center">
+              <td style="border: black 1px solid;">{{$parameter->parameter}}</td> 
+              <td style="border: black 1px solid;">{{$parameter->unit}}</td> 
+              <td style="border: black 1px solid;">{{$parameter->recommended_value}}</td>   
+              <td style="border: black 1px solid;">{{$parameter->maximum_allowable}}</td>         
+              <td class="center" style="border: black 1px solid; width:146px">
                 <a class="btn btn-info btn-xs" href="{{ route('parametros.edit',$parameter->id)}}">
                   <i class="glyphicon glyphicon-edit icon-white"></i>
                   {{trans('validation.attributes.edit')}}

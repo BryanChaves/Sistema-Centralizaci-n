@@ -1,16 +1,16 @@
-<table id="tables" class="table table-striped table-bordered bootstrap-datatable datatable responsive">
+<table id="tables" class="table table-striped table-bordered bootstrap-datatable datatable responsive" style="border: black 1px solid; width:500px; margin: 0 auto;">
     <thead>
     <tr>
-        <th>{{trans('validation.attributes.num_resolution')}}</th>
-        <th>{{trans('validation.attributes.actions')}}</th>
+        <th style='border: black 2px solid; text-align:center;'>{{trans('validation.attributes.num_resolution')}}</th>
+        <th style='border: black 2px solid; text-align:center;'>{{trans('validation.attributes.actions')}}</th>
     </tr>
     </thead>
     <tbody>
     
       @foreach($resolutions as $resolution)
            <tr data-id="{{$resolution->id}}">
-              <td>{{$resolution->num_resolution}}</td>         
-              <td class="center">
+              <td style='border: black 1px solid;'>{{$resolution->num_resolution}}</td>         
+              <td class="center" style='border: black 1px solid; width:147px'>
                 <a class="btn btn-info btn-xs" href="{{ route('resoluciones.edit',$resolution->id)}}">
                   <i class="glyphicon glyphicon-edit icon-white"></i>
                   {{trans('validation.attributes.edit')}}

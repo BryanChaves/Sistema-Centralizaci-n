@@ -1,11 +1,11 @@
-<table id="tables" class="table table-striped table-bordered bootstrap-datatable datatable responsive">
+<table id="tables" class="table table-striped table-bordered bootstrap-datatable datatable responsive" style="border: black 1px solid;">
     <thead>
     <tr>
-        <th>{{trans('validation.attributes.agent')}}</th>
-        <th>{{trans('validation.attributes.laboratory')}}</th>
-        <th>{{trans('validation.attributes.date')}}</th>
-        <th>{{trans('validation.attributes.report_number')}}</th>
-        <th>{{trans('validation.attributes.actions')}}</th>
+        <th style='border: black 2px solid; text-align:center;'>{{trans('validation.attributes.agent')}}</th>
+        <th style='border: black 2px solid; text-align:center;'>{{trans('validation.attributes.laboratory')}}</th>
+        <th style='border: black 2px solid; text-align:center;'>{{trans('validation.attributes.date')}}</th>
+        <th style='border: black 2px solid; text-align:center;'>{{trans('validation.attributes.report_number')}}</th>
+        <th style='border: black 2px solid; text-align:center;'>{{trans('validation.attributes.actions')}}</th>
     </tr>
     </thead>
     <tbody>
@@ -15,14 +15,14 @@
               @foreach($entities as $entity)
                 <?php
                   if($entity->id == $value->agent_id){
-                      echo "<td>$entity->name</td>";    
+                      echo "<td style='border: black 1px solid;''>$entity->name</td>";    
                     } 
                  ?>
               @endforeach 
-              <td>{{$value->laboratory_name}}</td> 
-              <td>{{$value->date}}</td>   
-              <td>{{$value->report_number}}</td>         
-              <td class="center">
+              <td style="border: black 1px solid;">{{$value->laboratory_name}}</td> 
+              <td style="border: black 1px solid;">{{$value->date}}</td>   
+              <td style="border: black 1px solid;">{{$value->report_number}}</td>         
+              <td class="center" style="border: black 1px solid; width:146px">
                 <a class="btn btn-info btn-xs" href="{{ route('analisis.edit',$value->id)}}">
                   <i class="glyphicon glyphicon-edit icon-white"></i>
                   {{trans('validation.attributes.edit')}}

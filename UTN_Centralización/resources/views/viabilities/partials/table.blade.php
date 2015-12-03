@@ -1,26 +1,26 @@
-<table id="tables" class="table table-striped table-bordered bootstrap-datatable datatable responsive">
+<table id="tables" class="table table-striped table-bordered bootstrap-datatable datatable responsive" style="border: black 1px solid;">
     <thead>
     <tr>
-        <th>{{trans('validation.attributes.project_name')}}</th>
-        <th>{{trans('validation.attributes.setena_administrative_record')}}</th>
-        <th>{{trans('validation.attributes.province')}}</th>
-        <th>{{trans('validation.attributes.actions')}}</th>
+        <th style='border: black 2px solid; text-align:center;'>{{trans('validation.attributes.project_name')}}</th>
+        <th style='border: black 2px solid; text-align:center;'>{{trans('validation.attributes.setena_administrative_record')}}</th>
+        <th style='border: black 2px solid; text-align:center;'>{{trans('validation.attributes.province')}}</th>
+        <th style='border: black 2px solid; text-align:center;'>{{trans('validation.attributes.actions')}}</th>
     </tr>
     </thead>
     <tbody>
     
       @foreach($viabilities as $viability)
            <tr data-id="{{$viability->id}}">
-              <td>{{$viability->project_name}}</td> 
-              <td>{{$viability->setena_administrative_record}}</td>   
+              <td style='border: black 1px solid;'>{{$viability->project_name}}</td> 
+              <td style='border: black 1px solid;'>{{$viability->setena_administrative_record}}</td>   
               @foreach($provinces as $province)
                 <?php
               if($province->id == $viability->province){
-                echo "<td>$province->name</td>";    
+                echo "<td style='border: black 1px solid;'>$province->name</td>";    
                 }     
                 ?>
               @endforeach         
-              <td class="center">
+              <td class="center" style='border: black 1px solid; width:200px'>
                <a class="btn btn-success btn-xs" href="{{ route('viabilidades.show',$viability->id)}}">
                   <i class="glyphicon glyphicon-search icon-white"></i>
                   {{trans('validation.attributes.show')}}

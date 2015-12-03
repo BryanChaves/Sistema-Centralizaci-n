@@ -135,7 +135,7 @@
     
     <div class="clearfix"></div>
     
-    <footer>
+    <footer style="background: #0B0B3B;">
 
         <p>
             <span style="text-align:left;float:left">&copy; 2015 <a href="http://www.utn.ac.cr/" alt="Bootstrap_Metro_Dashboard">{{trans('validation.attributes.UTN')}}</a></span>

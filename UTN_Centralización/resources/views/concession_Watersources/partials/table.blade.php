@@ -1,9 +1,9 @@
-<table id="tables" class="table table-striped table-bordered bootstrap-datatable datatable responsive">
+<table id="tables" class="table table-striped table-bordered bootstrap-datatable datatable responsive" style="border: black 1px solid; width:600px; margin: 0 auto;">
     <thead>
     <tr>
-        <th>{{trans('validation.attributes.concession')}}</th>
-        <th>{{trans('validation.attributes.watersource')}}</th>
-        <th>{{trans('validation.attributes.actions')}}</th>
+        <th style='border: black 2px solid; text-align:center;'>{{trans('validation.attributes.concession')}}</th>
+        <th style='border: black 2px solid; text-align:center;'>{{trans('validation.attributes.watersource')}}</th>
+        <th style='border: black 2px solid; text-align:center;'>{{trans('validation.attributes.actions')}}</th>
     </tr>
     </thead>
     <tbody>
@@ -13,18 +13,18 @@
               @foreach($concessions as $concession)
                   <?php
                     if($concession->id == $concession_Watersource->concession_id){
-                         echo "<td>$concession->agent</td>";    
+                         echo "<td style='border: black 1px solid;'>$concession->agent</td>";    
                        } 
                   ?>
               @endforeach
               @foreach($watersources as $watersource)
                   <?php
                     if($watersource->id == $concession_Watersource->watersource_id){
-                         echo "<td>$watersource->watersource_name</td>";    
+                         echo "<td style='border: black 1px solid;'>$watersource->watersource_name</td>";    
                        } 
                   ?>
               @endforeach        
-              <td class="center">
+              <td class="center" style='border: black 1px solid; width:147px'>
                 <a class="btn btn-info btn-xs" href="{{ route('concesion-naciente.edit',$concession_Watersource->id)}}">
                   <i class="glyphicon glyphicon-edit icon-white"></i>
                   {{trans('validation.attributes.edit')}}

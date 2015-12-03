@@ -1,11 +1,11 @@
 <table id="tables" class="table table-striped table-bordered bootstrap-datatable datatable responsive" style="background: #A4A4A4; border: black 1px solid;">
     <thead>
     <tr>
-        <th>{{trans('validation.attributes.name')}}</th>
-        <th>{{trans('validation.attributes.ID_number')}}</th>
-        <th>{{trans('validation.attributes.email')}}</th>
-        <th>{{trans('validation.attributes.telephone')}}</th>
-        <th>{{trans('validation.attributes.actions')}}</th>
+        <th style="text-align: center;">{{trans('validation.attributes.name')}}</th>
+        <th style="text-align: center;">{{trans('validation.attributes.ID_number')}}</th>
+        <th style="text-align: center;">{{trans('validation.attributes.email')}}</th>
+        <th style="text-align: center;">{{trans('validation.attributes.telephone')}}</th>
+        <th style="text-align: center;">{{trans('validation.attributes.actions')}}</th>
     </tr>
     </thead>
     <tbody>
@@ -17,7 +17,7 @@
               <td>{{$user->ID_number}}</td>
               <td>{{$user->email}}</td>
               <td>{{$user->telephone_number}}</td>
-              <td class="center">
+              <td class="center" style="width:165px">
                 <a class="btn btn-info btn-xs" href="{{ route('usuarios.edit',$user->id)}}">
                   <i class="halflings-icon white edit"></i>
                   {{trans('validation.attributes.edit')}}

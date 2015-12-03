@@ -1,24 +1,24 @@
-<table id="tables" class="table table-striped table-bordered bootstrap-datatable datatable responsive">
+<table id="tables" class="table table-striped table-bordered bootstrap-datatable datatable responsive" style="border: black 1px solid;">
     <thead>
     <tr>
-        <th>{{trans('validation.attributes.capacity')}}</th>
-        <th>{{trans('validation.attributes.method')}}</th>
-        <th>{{trans('validation.attributes.observations')}}</th>
-        <th>{{trans('validation.attributes.date')}}</th>
-        <th>{{trans('validation.attributes.weather')}}</th>
-        <th>{{trans('validation.attributes.name')}}</th>
+        <th style='border: black 2px solid;'>{{trans('validation.attributes.capacity')}}</th>
+        <th style='border: black 2px solid;'>{{trans('validation.attributes.method')}}</th>
+        <th style='border: black 2px solid;'>{{trans('validation.attributes.observations')}}</th>
+        <th style='border: black 2px solid;'>{{trans('validation.attributes.date')}}</th>
+        <th style='border: black 2px solid;'>{{trans('validation.attributes.weather')}}</th>
+        <th style='border: black 2px solid;'>{{trans('validation.attributes.name')}}</th>
     </tr>
     </thead>
         <tbody>
       @foreach($aforos as $aforo)
       
            <tr>
-              <td>{{$aforo->capacity}}</td>
-              <td>{{$aforo->method}}</td>
-              <td>{{$aforo->observations}}</td>
-              <td>{{$aforo->date}}</td> 
-               <td>{{$aforo->weather}}</td>  
-               <td>{{$aforo->name}}</td>        
+              <td style="border: black 1px solid;">{{$aforo->capacity}}</td>
+              <td style="border: black 1px solid;">{{$aforo->method}}</td>
+              <td style="border: black 1px solid;">{{$aforo->observations}}</td>
+              <td style="border: black 1px solid;">{{$aforo->date}}</td> 
+               <td style="border: black 1px solid;">{{$aforo->weather}}</td>  
+               <td style="border: black 1px solid;">{{$aforo->name}}</td>        
            </tr>
       @endforeach 
     </tbody>

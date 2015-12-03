@@ -1,16 +1,16 @@
-<table id="tables" class="table table-striped table-bordered bootstrap-datatable datatable responsive">
+<table id="tables" class="table table-striped table-bordered bootstrap-datatable datatable responsive" style="border: black 1px solid; width:500px; margin: 0 auto;">
     <thead>
     <tr>
-        <th>{{trans('validation.attributes.name')}}</th>
-        <th>{{trans('validation.attributes.actions')}}</th>
+        <th style='border: black 2px solid; text-align:center;'>{{trans('validation.attributes.name')}}</th>
+        <th style='border: black 2px solid; text-align:center;'>{{trans('validation.attributes.actions')}}</th>
     </tr>
     </thead>
     <tbody>
     
       @foreach($roles as $rol)
            <tr data-id="{{$rol->id}}">
-              <td>{{$rol->rol_value}}</td>
-              <td class="center">
+              <td style="border: black 1px solid;">{{$rol->rol_value}}</td>
+              <td class="center" style="border: black 1px solid; width:147px">
                 <a class="btn btn-info btn-xs" href="{{ route('roles.edit',$rol->id)}}">
                   <i class="glyphicon glyphicon-edit icon-white"></i>
                   {{trans('validation.attributes.edit')}}

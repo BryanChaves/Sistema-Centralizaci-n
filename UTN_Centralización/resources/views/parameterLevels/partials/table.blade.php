@@ -1,24 +1,24 @@
-<table id="tables" class="table table-striped table-bordered bootstrap-datatable datatable responsive">
+<table id="tables" class="table table-striped table-bordered bootstrap-datatable datatable responsive" style="border: black 1px solid; width:600px; margin: 0 auto;">
     <thead>
     <tr>
-        <th>{{trans('validation.attributes.level')}}</th>
-        <th>{{trans('validation.attributes.parameter')}}</th>
-        <th>{{trans('validation.attributes.actions')}}</th>
+        <th style='border: black 2px solid; text-align:center;'>{{trans('validation.attributes.level')}}</th>
+        <th style='border: black 2px solid; text-align:center;'>{{trans('validation.attributes.parameter')}}</th>
+        <th style='border: black 2px solid; text-align:center;'>{{trans('validation.attributes.actions')}}</th>
     </tr>
     </thead>
     <tbody>
           <tr>  
             @foreach($parameterLevels as $parameterLevel)
-            <td>{{$parameterLevel->level}}</td> 
+            <td style="border: black 1px solid; width:100px">{{$parameterLevel->level}}</td> 
               @foreach($parameters as $parameter)
                 <?php
                   if($parameter->id == $parameterLevel->parameter_id){
-                      echo "<td>$parameter->parameter</td>";    
+                      echo "<td style='border: black 1px solid;'>$parameter->parameter</td>";    
                     } 
                  ?>
              @endforeach 
                      
-              <td class="center">
+              <td class="center" style="border: black 1px solid; width:146px">
                 <a class="btn btn-info btn-xs" href="{{ route('nivel-parametros.edit',$parameterLevel->id)}}">
                   <i class="glyphicon glyphicon-edit icon-white"></i>
                   {{trans('validation.attributes.edit')}}
