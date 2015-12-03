@@ -16,7 +16,7 @@ use Session;
 
 class ReportqualityController extends Controller
 {
-    
+
     public function __construct()
     {  
         $this->middleware('auth');
@@ -35,11 +35,11 @@ class ReportqualityController extends Controller
         if($tipo == "Gestor"){
             $samplingSites = \DB::select("select * from sampling_site where agent_id  =".$idEntity);
         }else{
-           $samplingSites=Samplingsite::all();
-       }
+         $samplingSites=Samplingsite::all();
+     }
 
-       return view('reports.quality.index',compact('samplingSites','view'));
-   }
+     return view('reports.quality.index',compact('samplingSites','view'));
+ }
 
     /**
      * Show the form for creating a new resource.
@@ -60,38 +60,76 @@ class ReportqualityController extends Controller
     public function store(ReportQualityRequest $request)
     {       
         $view=Auth::user()->getView();
-        $samplingSites=Samplingsite::all();
-        $sampling_id = (int)$request->input('sampling_site_id');
         $startDate = (string)$request->input('startDate');
         $endDate = (string)$request->input('endDate');
         $tipo = Auth::user()->getRol();
         $idEntity=Auth::user()->idEntity();
-//var_dump($startDate."...".$endDate);
-//die();
-        if($tipo == "Gestor"){
-                       $record = \DB::select("select p.parameter, p.unit, r.value, p.maximum_allowable, s.id, a.report_number from record r
-            inner join parameter p on p.id = r.parameter_id
-            inner join sampling s on s.id = r.sampling_id
-            inner join sampling_site sa on sa.id = s.sampling_site_id and sa.id=".$sampling_id."
-            and date(s.created_at) >= date('".$startDate."') and date(s.created_at) <= date('".$endDate."')
-            inner join entity e on e.id = sa.agent_id and e.id =".$idEntity."
-            inner join analysis a on a.agent_id = e.id and s.analysis_id = a.id");
 
+        $puntoControl = $request->input('F1');
+        $id_comboMostrar = $request->input('combo');
 
+        $estructura = "";
+        $value ="";
+
+        if($puntoControl == "sampling_site")
+        {
+         if ($startDate<$endDate) 
+         {
+          if($id_comboMostrar != "todos")
+          {
+                $value = " and sa.id=".$id_comboMostrar;
+           }
+            if($tipo == "Gestor")
+            {
+                $estructura =" and e.id =".$idEntity;
+            }
+
+            $record = \DB::select("select p.parameter, p.unit, r.value, p.maximum_allowable, s.id, a.report_number from record r
+                inner join parameter p on p.id = r.parameter_id
+                inner join sampling s on s.id = r.sampling_id
+                inner join sampling_site sa on sa.id = s.sampling_site_id ".$value."
+                and date(s.created_at) >= date('".$startDate."') and date(s.created_at) <= date('".$endDate."')
+                inner join entity e on e.id = sa.agent_id".$estructura."
+                inner join analysis a on a.agent_id = e.id and s.analysis_id = a.id");
+            return view('reports.quality.resultado',compact('view','record'));
         }else{
-           $record = \DB::select("select p.parameter, p.unit, r.value, p.maximum_allowable, s.id, a.report_number from record r
+           Session::flash('message','Existe un error con las fechas favor revisar');
+           return redirect()->route('calidades.index');
+       }
+   }
+
+   if($puntoControl == "watersource")
+   {
+    if ($startDate<$endDate) 
+    {
+        if($tipo == "Gestor")
+        {
+            $estructura =" and e.id =".$idEntity;
+        }
+   if($id_comboMostrar != "todos")
+          {
+                $value = " and sa.id=".$id_comboMostrar;
+           }
+
+        $record = \DB::select("select p.parameter, p.unit, r.value, p.maximum_allowable, s.id, a.report_number from record r
             inner join parameter p on p.id = r.parameter_id
             inner join sampling s on s.id = r.sampling_id
-            inner join sampling_site sa on sa.id = s.sampling_site_id and sa.id=".$sampling_id."
-            and date(s.created_at) >= date('".$startDate."') and date(s.created_at) <= date('".$endDate."')
-            inner join entity e on e.id = sa.agent_id
-            inner join analysis a on a.agent_id = e.id and s.analysis_id = a.id");
+            inner join watersource w on w.id = s.watersource_id ".$value."
+            inner join concession_watersource cw on cw.watersource_id = w.id
+            inner join concession c on c.id = cw.concession_id
+            inner join entity e on e.id = c.agent_id".$estructura."
+            inner join analysis a on a.agent_id = e.id and s.analysis_id = a.id
+            where date(s.created_at) >= date('".$startDate."') and date(s.created_at) <= date('".$endDate."')");
 
-       }              
-             //  $sampling = \DB::select("select id from sampling where sampling_site_id =".$sampling_id);
-       //dd($record);
-       return view('reports.quality.resultado',compact('samplingSites','view','record'));
+        return view('reports.quality.resultado',compact('view','record'));
+        
+    }else{
+       Session::flash('message','Existe un error con las fechas favor revisar');
+       return redirect()->route('calidades.index');
    }
+}
+
+}
 
 
 

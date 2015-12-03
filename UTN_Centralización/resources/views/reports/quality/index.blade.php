@@ -20,13 +20,18 @@
 		
 		{!!Form::open(['route'=>'calidades.store','method'=>'POST'])!!} 
       		<div class="form-group">   
-  <select  class="form-control"  name="sampling_site_id">
-    @foreach($samplingSites as $samplingSite)
-      <?php                    
-       echo "<option selected value=$samplingSite->id>$samplingSite->name</option>";                    
-      ?>
-    @endforeach
+    <div class="form-group">
+          <label class="control-label">{{trans('validation.attributes.check_points')}}</label>
+          <select id="F1" onchange="cargarCombo()" name="F1">
+          <option value=" " selected="selected">Seleccione punto de Control</option>
+            <option value="watersource">Nacientes</option>
+            <option value="sampling_site">Muestreos aleatorios</option>
+          </select>
+         </div> 
+<div class="form-group" id="div">
+  <select class="text" name="combo"  id="combo">
   </select>
+</div> 
 			</div> 
 			<div class="form-group">
   				<label class="control-label">{{trans('validation.attributes.startDate')}}</label>
