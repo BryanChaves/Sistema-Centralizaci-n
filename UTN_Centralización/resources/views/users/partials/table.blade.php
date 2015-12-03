@@ -1,4 +1,4 @@
-<table id="tables" class="table table-striped table-bordered bootstrap-datatable datatable responsive">
+<table id="tables" class="table table-striped table-bordered bootstrap-datatable datatable responsive" style="background: #A4A4A4; border: black 1px solid;">
     <thead>
     <tr>
         <th>{{trans('validation.attributes.name')}}</th>
@@ -22,9 +22,9 @@
                   <i class="halflings-icon white edit"></i>
                   {{trans('validation.attributes.edit')}}
                 </a>
-                <a class="btn btn-danger btn-xs" href="">
+                <a class="btn-danger btn-xs" href="">
                   {!! Form::open(['method'=>'delete','action'=>['UserController@destroy',$user->id], 'style' => 'display:inline']) !!}<button type="submit" onclick="return confirm('Seguro que desea eliminar?')" class="btn btn-danger btn-xs">{{trans('validation.attributes.remove')}}</button>{!! Form::close() !!}
-                  <i class="glyphicon glyphicon-trash icon-white"></i>
+                  <i class="glyphicon glyphicon-trash"></i>
                 </a>
         
               </td>              

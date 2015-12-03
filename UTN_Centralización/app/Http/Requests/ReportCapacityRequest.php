@@ -24,7 +24,6 @@ class ReportCapacityRequest extends Request
     public function rules()
     {
         return [
-            'check_point'=>'required|in:watersource,sampling_site',
             'startDate'=>'required|date',
             'endDate'=>'required|date'
         ];

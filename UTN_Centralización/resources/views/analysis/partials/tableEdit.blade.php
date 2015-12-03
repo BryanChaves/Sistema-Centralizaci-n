@@ -1,7 +1,7 @@
 <table id="tables" class="table table-striped table-bordered bootstrap-datatable datatable responsive">
     <thead>
     <tr>
-        <th>{{trans('validation.attributes.consecutive')}}</th>
+        <th>Consecutivo</th>
         <th>{{trans('validation.attributes.label')}}</th>
         <th>{{trans('validation.attributes.level')}}</th>
         <th>{{trans('validation.attributes.name')}}</th>
@@ -9,13 +9,13 @@
     </tr>
     </thead>
     <tbody>
-      @foreach($consult as $sampling)
+      @foreach($sql as $muestra)
            <tr>
-              <td>{{$sampling->consecutive}}</td>
-              <td>{{$sampling->label}}</td>
-              <td>{{$sampling->level}}</td>
-              <td>{{$sampling->name}}</td>
-              <td>{{$sampling->created_at}}</td>          
+              <td>{{$muestra->consecutive}}</td>
+              <td>{{$muestra->label}}</td>
+              <td>{{$muestra->level}}</td>
+              <td>{{$muestra->name}}</td>
+              <td>{{$muestra->created_at}}</td>          
            </tr>
       @endforeach 
     </tbody>

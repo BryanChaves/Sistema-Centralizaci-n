@@ -1,6 +1,14 @@
 @extends($view)
 
 @section('content')
+<ul class="breadcrumb">
+    <li>
+        <i><img src="/img/expe.png"></i>
+        <a>EXPEDIENTES</a> 
+        <i class="icon-angle-right"></i>
+    </li>
+</ul>
+
 <div class="message" id="messages"> 
         @if(Session::has('message'))
             <p id="message">{{Session::get('message')}}<button id="btn-close" type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></p>                               

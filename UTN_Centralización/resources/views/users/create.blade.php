@@ -1,6 +1,14 @@
 @extends($view)
 
 @section('content')
+    <ul class="breadcrumb">
+        <li>
+            <i><img src="/img/user1.png"></i>
+            <a>USUARIOS</a> 
+            <i class="icon-angle-right"></i>
+        </li>
+        <li><a>CREAR</a></li>
+    </ul>
     <div id="panel-create" class="panel panel-default">
 
         <div class="panel-body">

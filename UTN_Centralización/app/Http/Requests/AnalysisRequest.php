@@ -19,7 +19,7 @@ class AnalysisRequest extends Request
             'laboratory_name'=>'required|alpha',
             'date'=>'required|date',
             'report_number'=>'required|alpha_num',
-            'path'=>'mimes:pdf'
+            //'path'=>'mimes:pdf'
 
         ];
     }

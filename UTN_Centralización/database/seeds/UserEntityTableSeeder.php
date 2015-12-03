@@ -25,7 +25,7 @@ class UserEntityTableSeeder extends Seeder
         ]);
         factory(App\UserEntity::class)->create([
         'user_id'   => '4',
-        'entity_id' => '3'
+        'entity_id' => '4'
         ]); 
     }
 }

@@ -1975,6 +1975,7 @@ fieldset[disabled] .btn-warning.active {
 .btn-danger.active,
 .open .dropdown-toggle.btn-danger {
   background-image: none;
+  outline: none;
 }
 .btn-danger.disabled,
 .btn-danger[disabled],

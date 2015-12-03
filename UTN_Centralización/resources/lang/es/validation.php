@@ -108,12 +108,12 @@ return [
 		'password'  		=> 'contraseña',
 		'first_name'		=>'Nombre',
 		'last_name' 		=> 'Apellido',
-		'email'     		=>'correo electrónico',
+		'email'     		=>'Correo electrónico',
 		'type'      		=>'Tipo usuario',
-		'name'				=>'nombre',
+		'name'				=>'Nombre',
 		'last_name_1'		=>'primer apellido',
 		'last_name_2'		=>'segundo apellido',
-		'ID_number'			=>'cédula',
+		'ID_number'			=>'Cédula',
 		'telephone_number'	=>'número de teléfono',
 		'sampling_site_name'=>'nombre de naciente',
 		'address'           =>'dirección',
@@ -276,7 +276,6 @@ return [
 		'check_point'=>'Punto de control',
 		'agent_id'=>'Gestor',
 		'viability_number'=>'Número de viabilidad',
-		'consecutive'=>'Consecutivo',
 
 	],
 

@@ -114,3 +114,24 @@ var form =  document.getElementById('form');
 }catch(e) { alert(e);}
 
 }
+
+function form(){
+        var table = document.getElementById('f2');
+       var rowCount = table.rows.length;
+                         var muestra = new Array();
+                         var muestras = new Array();
+                         var consecutivo = 0;
+                        
+       for(var i=1; i<rowCount; i++) 
+       {
+           var row = table.rows[i];
+           var chkbox = row.cells[0].childNodes[0];
+           if(null != chkbox && true == chkbox.checked) 
+           {  
+                    return true;
+                   
+           }                           
+                }
+                            alert("Debe de seleccionar alguna MUESTRA");
+                  return false;  
+}

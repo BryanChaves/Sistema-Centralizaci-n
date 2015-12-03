@@ -18,13 +18,13 @@
               <td>{{$watersource->observations}}</td>
               <td class="center">
                 
-                <a class="btn btn-info btn-xs" href="{{ route('nacientes.edit',$watersource->id)}}">
+                <a class="btn btn-info btn-xs btn-block" href="{{ route('nacientes.edit',$watersource->id)}}">
                   <i class="glyphicon glyphicon-edit icon-white"></i>
                   {{trans('validation.attributes.edit')}}
                 </a>
-                <a class="btn btn-danger btn-xs" href="">
+                <a class="btn-danger btn-xs btn-block" href="">
                 {!! Form::open(['method'=>'delete','action'=>['WatersourceController@destroy',$watersource->id], 'style' => 'display:inline']) !!}<button type="submit" onclick="return confirm('Seguro que desea eliminar?')" class="btn btn-danger btn-xs">{{trans('validation.attributes.remove')}}</button>{!! Form::close() !!}
-                <i class="glyphicon glyphicon-trash icon-white"></i>
+                <i class="glyphicon glyphicon-trash"></i>
              
                 </a>
         

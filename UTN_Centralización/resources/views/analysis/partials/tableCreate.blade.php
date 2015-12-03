@@ -6,15 +6,16 @@
             <option value="watersource">Nacientes</option>
             <option value="sampling_site">Muestreos aleatorios</option>
           </select>
-         </div> 
+</div> 
 <div class="form-group" id="div">
   <select class="text" name="combo"  id="combo">
   </select>
 </div> 
 <div class="form-group" id="tabla" name="tabla">
-<table id="f2" class="table table-striped table-bordered bootstrap-datatable datatable responsive">
+Muestras
+<table id="f2" class="table table-striped table-bordered bootstrap-datatable ">
      <tr>
-      <th><INPUT type="checkbox"  onclick="checkAll('f2')"  /></th>
+      <th><INPUT type="checkbox" name="checkbox" onclick="checkAll('f2')"  /></th>
         <th>Consecutivo</th>
         <th>{{trans('validation.attributes.label')}}</th>
         <th>{{trans('validation.attributes.level')}}</th>

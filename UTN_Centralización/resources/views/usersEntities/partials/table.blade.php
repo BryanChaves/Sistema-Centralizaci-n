@@ -1,9 +1,9 @@
-<table id="tables" class="table table-striped table-bordered bootstrap-datatable datatable responsive">
+<table id="tables" class="table table-striped table-bordered bootstrap-datatable datatable responsive" style="border: black 1px solid;">
     <thead>
     <tr>
-        <th>{{trans('validation.attributes.user')}}</th>
-        <th>{{trans('validation.attributes.entity')}}</th>
-        <th>{{trans('validation.attributes.actions')}}</th>
+        <th style='border: black 2px solid;'>{{trans('validation.attributes.user')}}</th>
+        <th style='border: black 2px solid;'>{{trans('validation.attributes.entity')}}</th>
+        <th style='border: black 2px solid;'>{{trans('validation.attributes.actions')}}</th>
     </tr>
     </thead>
     <tbody>
@@ -13,27 +13,27 @@
               @foreach($users as $user)
                   <?php
                     if($user->id == $userEntity->user_id){
-                         echo "<td>$user->full_name</td>";    
+                         echo "<td style='border: black 1px solid;'>$user->full_name</td>";    
                        } 
                   ?>
               @endforeach
               @foreach($entities as $entity)
                   <?php
                     if($entity->id == $userEntity->entity_id){
-                         echo "<td>$entity->name</td>";    
+                         echo "<td style='border: black 1px solid;'>$entity->name</td>";    
                        } 
                   ?>
               @endforeach
               
              
-              <td class="center">
+              <td class="center" style="border: black 1px solid;">
                 <a class="btn btn-info btn-xs" href="{{ route('usuarios-entidades.edit',$userEntity->id)}}">
                   <i class="glyphicon glyphicon-edit icon-white"></i>
                   {{trans('validation.attributes.edit')}}
                 </a>
-                <a class="btn btn-danger btn-xs" href="">
+                <a class="btn-danger btn-xs" href="">
                 {!! Form::open(['method'=>'delete','action'=>['UserEntityController@destroy',$userEntity->id], 'style' => 'display:inline']) !!}<button type="submit" onclick="return confirm('Seguro que desea eliminar?')" class="btn btn-danger btn-xs">{{trans('validation.attributes.remove')}}</button>{!! Form::close() !!}
-                <i class="glyphicon glyphicon-trash icon-white"></i>
+                <i class="glyphicon glyphicon-trash"></i>
              
                 </a>
         

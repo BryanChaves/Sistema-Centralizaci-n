@@ -8,6 +8,7 @@ use App\Http\Requests\AnalysisRequest;
 use App\Http\Requests\AnalysisEditRequest;
 use App\Http\Controllers\Controller;
 use App\Analysis;
+use App\Sampling;
 use App\Entity;
 use Auth;
 use Carbon\Carbon;
@@ -61,8 +62,9 @@ class AnalysisController extends Controller
             $analysis->updated_at = $date;           
             $analysis->save();
             $id = $analysis->id;    
-    
+
             $muestras = $_POST['muestras'];
+
             $muestras = explode(",", $muestras);
 
             $this->updateSampling($id,$muestras);
@@ -175,37 +177,40 @@ class AnalysisController extends Controller
      } 
 
       public function updateSampling($id,$muestrasId){
+       // var_dump($muestrasId);
+        //die();
           foreach ($muestrasId as $key => $value) {
+
              $sampling = Sampling::findOrFail($value);
              $sampling->analysis_id = $id;
              $sampling->save();
           }
     }
         public function cargarTabla($file){
-        $typeRol = Auth::user()->getRol();
+        $tipo = Auth::user()->getRol();
         $idEntity=Auth::user()->idEntity();
-        $consult = "";
+        $sql = "";
         $file = explode(",", $file);
-        $structure ="";
-        $checkPoint = $file[0];
-        $id_cmbView =$file[1];
+        $estructura ="";
+        $puntoControl = $file[0];
+        $id_comboMostrar =$file[1];
        // dd($id_comboMostrar);
-        if($checkPoint == "watersource")
+        if($puntoControl == "watersource")
         {
-            if($id_cmbView == "todos")
+            if($id_comboMostrar == "todos")
             {
-                if($typeRol == "Gestor")
+                if($tipo == "Gestor")
                 {
-                    $structure =" and e.id = ".$idEntity;
+                    $estructura =" and e.id = ".$idEntity;
                 }
-                $consult = \DB::select("select s.id,s.consecutive, s.label, s.level, w.watersource_name as name, s.created_at from sampling s
+                $sql = \DB::select("select s.id,s.consecutive, s.label, s.level, w.watersource_name as name, s.created_at from sampling s
                     inner join watersource w on w.id = s.watersource_id
                     inner join concession_watersource cw on cw.watersource_id = w.id
                     inner join concession c on c.id = cw.concession_id
                     inner join entity e on e.id = c.agent_id".$estructura.
                     " where s.analysis_id IS NULL");  
             }else{
-                $consult = \DB::select("select s.id,s.consecutive, s.label, s.level, w.watersource_name as name, s.created_at from sampling s
+                $sql = \DB::select("select s.id,s.consecutive, s.label, s.level, w.watersource_name as name, s.created_at from sampling s
                     inner join watersource w on w.id = s.watersource_id
                     inner join concession_watersource cw on cw.watersource_id = w.id
                     inner join concession c on c.id = cw.concession_id
@@ -213,26 +218,26 @@ class AnalysisController extends Controller
                     where s.watersource_id = ".$id_comboMostrar." and s.analysis_id IS NULL");  
             }                  
         }else{
-           if($checkPoint == "sampling_site")
+           if($puntoControl == "sampling_site")
            {
-            if($id_cmbView == "todos")
+            if($id_comboMostrar == "todos")
             {
-                if($typeRol == "Gestor")
+                if($tipo == "Gestor")
                 {
-                    $structure =" and e.id =".$idEntity;
+                    $estructura =" and e.id =".$idEntity;
                 }
-                $consult = \DB::select("select s.id, s.consecutive, s.label, s.level, ss.name, s.created_at from sampling s
+                $sql = \DB::select("select s.id, s.consecutive, s.label, s.level, ss.name, s.created_at from sampling s
                    inner join sampling_site ss on ss.id = s.sampling_site_id
                    inner join entity e on e.id = ss.agent_id".$estructura.
                    " where s.analysis_id IS NULL");  
             }else{
-               $consult = \DB::select("select s.id,s.consecutive, s.label, s.level, ss.name, s.created_at from sampling s
+               $sql = \DB::select("select s.id,s.consecutive, s.label, s.level, ss.name, s.created_at from sampling s
                    inner join sampling_site ss on ss.id = s.sampling_site_id
                    inner join entity e on e.id = ss.agent_id
                    where s.sampling_site_id = ".$id_comboMostrar." and s.analysis_id IS NULL");  
            }   
        }
    }
-   return response()->json($consult); 
+   return response()->json($sql); 
 } 
 }

@@ -13,9 +13,9 @@
 use Carbon\Carbon;
 
 $factory->define(App\User::class, function (Faker\Generator $faker) {
-	$date = Carbon::now();
+    $date = Carbon::now();
     return [
-    	'name' => 'Bryan Miguel',
+        'name' => 'Bryan Miguel',
         'last_name_1' => 'Chaves',
         'last_name_2' => 'Salas',
         'ID_number' => '206700297',
@@ -30,7 +30,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 $factory->define(App\Rol::class, function (Faker\Generator $faker) {
     $date = Carbon::now();
     return [
-       	'name' => 'administrator',
+        'name' => 'administrator',
         'rol_value' => 'administrator',
         'created_at' => $date,
         'updated_at' => $date
@@ -39,7 +39,7 @@ $factory->define(App\Rol::class, function (Faker\Generator $faker) {
 $factory->define(App\Entity::class, function (Faker\Generator $faker) {
     $date = Carbon::now();
     return [
-       	'name' => 'Universidad Técnica Nacional',
+        'name' => 'Universidad Técnica Nacional',
         'address' => '400 Sur del parque de Ciudad Quesada',
         'email' => 'utn_sancarlos@utn.ac.cr',
         'telephone_number' => '24605102',
@@ -53,7 +53,7 @@ $factory->define(App\Entity::class, function (Faker\Generator $faker) {
 $factory->define(App\UserEntity::class, function (Faker\Generator $faker) {
     $date = Carbon::now();
     return [
-       	'user_id' 	=> '1',
+        'user_id'   => '1',
         'entity_id' => '1',
         'created_at'=> $date,
         'updated_at'=> $date
@@ -191,7 +191,7 @@ $factory->define(App\Flow_Measurement::class, function (Faker\Generator $faker) 
         'created_at' => $date,
         'updated_at' => $date
     ];
-});
+}); 
 $factory->define(App\Sampling::class, function (Faker\Generator $faker) {
     $date = Carbon::now();
     return [

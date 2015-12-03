@@ -1,6 +1,14 @@
 @extends($view)
 
 @section('content')
+    <ul class="breadcrumb">
+        <li>
+            <i><img src="/img/entidad.png"></i>
+            <a>ENTIDADES</a> 
+            <i class="icon-angle-right"></i>
+        </li>
+        <li><a>EDITAR</a></li>
+    </ul>
     <div id="panel-update" class="panel panel-default">
         
        

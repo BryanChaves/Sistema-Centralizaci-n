@@ -1,6 +1,13 @@
 @extends($view)
 
 @section('content')
+	<ul class="breadcrumb">
+        <li>
+            <i><img src="/img/naciente.png"></i>
+            <a>NACIENTES</a> 
+            <i class="icon-angle-right"></i>
+        </li>
+    </ul>
 	
 	<div class="message" id="messages"> 
         @if(Session::has('message'))

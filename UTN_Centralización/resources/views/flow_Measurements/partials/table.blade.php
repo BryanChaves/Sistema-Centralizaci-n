@@ -35,9 +35,9 @@
                   <i class="glyphicon glyphicon-edit icon-white"></i>
                   {{trans('validation.attributes.edit')}}
                 </a>
-                <a class="btn btn-danger btn-xs" href="">
+                <a class="btn-danger btn-xs" href="">
                 {!! Form::open(['method'=>'delete','action'=>['Flow_MeasurementController@destroy',$flow_Measurement->id], 'style' => 'display:inline']) !!}<button type="submit" onclick="return confirm('Seguro que desea eliminar?')" class="btn btn-danger btn-xs">{{trans('validation.attributes.remove')}}</button>{!! Form::close() !!}
-                <i class="glyphicon glyphicon-trash icon-white"></i>
+                <i class="glyphicon glyphicon-trash"></i>
                 </a>        
               </td>              
            </tr>
